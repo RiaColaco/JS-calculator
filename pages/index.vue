@@ -85,16 +85,16 @@
       </svg>
     </button>
     <header class="calculator-header">
-      <div class="calculator-operation">5874 + 2547</div>
-      <div class="calculator-operation-result">7,895</div>
+      <div class="calculator-operation" v-if="!operatorClicked">{{prev}} {{operatorSign}} {{current}}</div>
+      <div class="calculator-operation-result">{{ current  || '0'}}</div>
     </header>
     <main class="calculator-body">
     </main>
     <div class="calculator-button-wrapper">
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button" @click="clear">
         <span>C</span>
       </button>
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button" @click="divide">
         <span>
           <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 10C5 9.83424 5.06585 9.67527 5.18306 9.55806C5.30027 9.44085 5.45924 9.375 5.625 9.375H14.375C14.5408 9.375 14.6997 9.44085 14.8169 9.55806C14.9342 9.67527 15 9.83424 15 10C15 10.1658 14.9342 10.3247 14.8169 10.4419C14.6997 10.5592 14.5408 10.625 14.375 10.625H5.625C5.45924 10.625 5.30027 10.5592 5.18306 10.4419C5.06585 10.3247 5 10.1658 5 10Z" fill="currentColor"/>
@@ -103,62 +103,62 @@
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button" @click="times">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button" @click="clear">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
             <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(7)">
+      <button type="button" class="calculator-button highlight" @click="append('7')">
         <span>7</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(8)">
+      <button type="button" class="calculator-button highlight" @click="append('8')">
         <span>8</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(9)">
+      <button type="button" class="calculator-button highlight" @click="append('9')">
         <span>9</span>
       </button>
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button"  @click="minus">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(4)">
+      <button type="button" class="calculator-button highlight" @click="append('4')" >
         <span>4</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(5)">
+      <button type="button" class="calculator-button highlight" @click="append('5')" >
         <span>5</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(6)">
+      <button type="button" class="calculator-button highlight" @click="append('6')">
         <span>6</span>
       </button>
-      <button type="button" class="calculator-button">
+      <button type="button" class="calculator-button"  @click="plus">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(1)">
+      <button type="button" class="calculator-button highlight" @click="append('1')" >
         <span>1</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(2)">
+      <button type="button" class="calculator-button highlight" @click="append('2')">
         <span>2</span>
       </button>
-      <button type="button" class="calculator-button highlight" @click="numberClicked(3)">
+      <button type="button" class="calculator-button highlight" @click="append('3')">
         <span>3</span>
       </button>
-      <button type="button" class="calculator-button equal">
+      <button type="button" class="calculator-button equal" @click="equal">
         <span>
           <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.00006 8.625C5.00006 8.45924 5.06591 8.30027 5.18312 8.18306C5.30033 8.06585 5.4593 8 5.62506 8H14.3751C14.5408 8 14.6998 8.06585 14.817 8.18306C14.9342 8.30027 15.0001 8.45924 15.0001 8.625C15.0001 8.79076 14.9342 8.94973 14.817 9.06694C14.6998 9.18415 14.5408 9.25 14.3751 9.25H5.62506C5.4593 9.25 5.30033 9.18415 5.18312 9.06694C5.06591 8.94973 5.00006 8.79076 5.00006 8.625Z" fill="currentColor"/>
@@ -166,17 +166,17 @@
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button highlight">
+      <button type="button" class="calculator-button highlight" @click="percent">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
             <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
           </svg>
         </span>
       </button>
-      <button type="button" class="calculator-button highlight">
+      <button type="button" class="calculator-button highlight"  @click="append('0')">
         <span>0</span>
       </button>
-      <button type="button" class="calculator-button highlight">
+      <button type="button" class="calculator-button highlight" @click="dot">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
             <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -192,17 +192,70 @@
     </div>
   </template>
 
-  <script setup>
-     const page = ref(1);
-     const prevVal = ref(0);
-     const nextVal = ref(0);
-     let isFirst = true
+<script setup>
+var prev = ref(null);
+var current = ref('');
+var operator = ref(null);
+var operatorSign = ref(null);
+var operatorClicked  = ref(false)
 
-     function numberClicked(val) {
-        console.log("x", val)
-        prevVal = value
-  page.value--;
-  //refresh();
+function clear(){
+  current.value = ''
+}
+function sign(){
+  current.value = current.value.charAt(0) === '-' ? current.value.slice(1) : `-${current.value}`
+}
+
+function percent(){
+  current.value = `${parseFloat(current.value)/100}`;
+}
+
+function append(number){
+  if(operatorClicked.value){
+      current.value = '';
+      operatorClicked.value = false;
+  }
+  current.value = `${current.value}${number}`
+}
+
+function dot(){
+  if(current.value.indexOf('.') === -1){
+      append('.')
+  }
+}
+
+function setPrev(){
+  prev.value = current.value;
+  operatorClicked.value = true;
+}
+
+function divide(){
+  operator.value = (a,b) => a/b;
+  operatorSign.value = '/'
+  setPrev(); 
+}
+
+function times(){
+  operator.value = (a,b) => a*b;
+  operatorSign.value = '*'
+  setPrev();
+}
+
+function minus(){
+  operator.value = (a,b) => a-b;
+  operatorSign.value = '-'
+  setPrev();
+}
+
+function plus(){
+  operator.value = (a,b) => a+b;
+  operatorSign.value = '+'
+  setPrev();
+}
+
+function equal(){
+  current.value = `${operator.value(parseFloat(prev.value), parseFloat(current.value))}`
+  prev.value = null;
 }
 </script>
 
